@@ -1,6 +1,5 @@
 import { Accordion } from 'react-bootstrap';
 import Question from './Question';
-import '../assets/styles/customAccordion.scss';
 import { useContext } from 'react';
 import { QuestionContext } from '../context/QuestionContext';
 

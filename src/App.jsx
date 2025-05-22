@@ -1,8 +1,6 @@
 import Header from './components/Header';
 import CustomAccordion from './components/CustomAccordion';
 import Filter from './components/Filter';
-import './assets/styles/app.scss';
-import './assets/styles/main.scss';
 import { useState } from 'react';
 import { Container } from 'react-bootstrap';
 
@@ -12,7 +10,7 @@ function App() {
   return (
     <>
       <Header />
-      <Container as='main'>
+      <Container as='main' className='d-flex flex-column gap-2'>
         <Filter setCategory={setCategory} />
         <CustomAccordion category={category} />
       </Container>

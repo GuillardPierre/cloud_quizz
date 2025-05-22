@@ -1,5 +1,4 @@
 import { Accordion, Button, Stack } from 'react-bootstrap';
-import '../assets/styles/question.scss';
 import { useContext } from 'react';
 import { QuestionContext } from '../context/QuestionContext';
 
@@ -13,10 +12,12 @@ export default function Question({ question }) {
   return (
     <Accordion.Item eventKey={question.id} key={question.id}>
       <Accordion.Header>
-        <div className='accordion-question-wrapper'>
+        <div className='accordion-question-wrapper w-100 d-flex justify-content-between'>
           <span>{question.question}</span>
           {question.validation !== null && (
-            <span className={question.validation ? 'true' : 'false'}>
+            <span
+              className={question.validation ? 'text-success' : 'text-danger'}
+            >
               {question.validation === true ? 'Vrai' : 'Faux'}
             </span>
           )}
