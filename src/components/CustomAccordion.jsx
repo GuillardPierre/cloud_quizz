@@ -1,55 +1,49 @@
 import { Accordion, Button, Col, Container, Row } from 'react-bootstrap';
-import { useContext } from 'react';
-import { QuestionContext } from '../context/QuestionContext';
+import Question from './Question';
+import '../assets/styles/customAccordion.scss';
+import useCustomAccordion from '../hooks/useCustomAccordion';
 
 export default function CustomAccordion({ category }) {
-  const { state, dispatch } = useContext(QuestionContext);
-
-  const filteredQuestions = state.filter(
-    (question) => category === 'all' || question.category === category
-  );
-
-  const handleResponse = (questionId, response) => {
-    dispatch({ type: 'response', questionId, response });
-  };
+  const { filteredQuestions, handleResponse, btnIsDisabled } =
+    useCustomAccordion(category);
 
   return (
     <Accordion>
       {filteredQuestions.map((question) => (
-        <Accordion.Item eventKey={question.id}>
-          <Accordion.Header>{question.question}</Accordion.Header>
+        <Accordion.Item eventKey={question.id} key={question.id}>
+          <Question
+            question={question.question}
+            response={question.validation}
+          />
           <Accordion.Body>
             <Container>
-              <Row className='justify-content-md-center'>
-                <Col xs={12} className='text-center'>
-                  Réponse proposée : {question.answer}
+              <Row>
+                <Col xs={12}>
+                  <span>Réponse </span>
                 </Col>
               </Row>
-              <Row className='justify-content-md-center'>
-                {question.validation ? (
-                  <Col xs={6} className='text-center'>
-                    Vous avez répondu : {question.validation}{' '}
-                  </Col>
-                ) : (
-                  <>
-                    <Col xs={2}>
-                      <Button
-                        variant='success'
-                        onClick={() => handleResponse(question.id, true)}
-                      >
-                        Vrai
-                      </Button>
-                    </Col>
-                    <Col xs={2}>
-                      <Button
-                        variant='danger'
-                        onClick={() => handleResponse(question.id, false)}
-                      >
-                        Faux
-                      </Button>
-                    </Col>
-                  </>
-                )}
+              <Row>
+                <Col xs={12}>{question.answer}</Col>
+              </Row>
+              <Row>
+                <Col xs={1}>
+                  <Button
+                    disabled={btnIsDisabled(question.validation)}
+                    variant='success'
+                    onClick={() => handleResponse(question.id, true)}
+                  >
+                    Juste
+                  </Button>
+                </Col>
+                <Col xs={1}>
+                  <Button
+                    disabled={btnIsDisabled(question.validation)}
+                    variant='danger'
+                    onClick={() => handleResponse(question.id, false)}
+                  >
+                    Fausse
+                  </Button>
+                </Col>
               </Row>
             </Container>
           </Accordion.Body>

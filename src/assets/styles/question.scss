@@ -1,0 +1,17 @@
+.accordion-question-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+p {
+  margin-bottom: 0;
+}
+.true {
+  color: green;
+}
+
+.false {
+  color: red;
+}

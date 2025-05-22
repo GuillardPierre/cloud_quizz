@@ -6,10 +6,10 @@ export const questionsReducer = (state, action) => {
   switch (action.type) {
     case 'response':
       return state.map((question) => {
-        if (question.id === action.questionId) {
+        if (question.id === action.questionId && !question.validation) {
           return {
             ...question,
-            validation: action.response ? 'vrai' : 'faux',
+            validation: action.response,
           };
         }
         return question;
