@@ -10,27 +10,14 @@ export default function Question({ question }) {
     dispatch({ type: 'response', questionId, response });
   };
 
-  const btnIsDisabled = (rep) => {
-    return rep === false || rep === true;
-  };
-
-  const displayResponse = (rep) => {
-    if (rep === false) {
-      return 'Faux';
-    } else if (rep === true) {
-      return 'Vrai';
-    }
-    return '';
-  };
-
   return (
     <Accordion.Item eventKey={question.id} key={question.id}>
       <Accordion.Header>
         <div className='accordion-question-wrapper'>
           <span>{question.question}</span>
-          {question.validation !== undefined && (
+          {question.validation !== null && (
             <span className={question.validation ? 'true' : 'false'}>
-              {displayResponse(question.validation)}
+              {question.validation === true ? 'Vrai' : 'Faux'}
             </span>
           )}
         </div>
@@ -41,14 +28,14 @@ export default function Question({ question }) {
           <p> {question.answer}</p>
           <Stack direction='horizontal' gap={2}>
             <Button
-              disabled={btnIsDisabled(question.validation)}
+              disabled={question.validation !== null}
               variant='success'
               onClick={() => handleResponse(question.id, true)}
             >
               Juste
             </Button>
             <Button
-              disabled={btnIsDisabled(question.validation)}
+              disabled={question.validation !== null}
               variant='danger'
               onClick={() => handleResponse(question.id, false)}
             >
