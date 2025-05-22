@@ -10,13 +10,13 @@ function App() {
   const [category, setCategory] = useState('all');
 
   return (
-    <Container as='body'>
+    <>
       <Header />
-      <main>
+      <Container as='main'>
         <Filter setCategory={setCategory} />
         <CustomAccordion category={category} />
-      </main>
-    </Container>
+      </Container>
+    </>
   );
 }
 

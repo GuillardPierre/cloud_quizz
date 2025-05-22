@@ -1,13 +1,18 @@
 import { Accordion, Button, Stack } from 'react-bootstrap';
 import '../assets/styles/question.scss';
+import { useContext } from 'react';
+import { QuestionContext } from '../context/QuestionContext';
 
-export default function Question({
-  question,
-  response,
-  btnIsDisabled,
-  handleResponse,
-}) {
-  console.log(response);
+export default function Question({ question }) {
+  const { dispatch } = useContext(QuestionContext);
+
+  const handleResponse = (questionId, response) => {
+    dispatch({ type: 'response', questionId, response });
+  };
+
+  const btnIsDisabled = (rep) => {
+    return rep === false || rep === true;
+  };
 
   const displayResponse = (rep) => {
     if (rep === false) {
